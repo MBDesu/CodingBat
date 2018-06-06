@@ -34,13 +34,15 @@ public class APExercises {
 	}
 
 	public int scoresAverage(int[] scores) {
-		return average(scores, 0, scores.length / 2) + average(scores, scores.length / 2 + 1, scores.length - 1);
+		int firstHalf = average(scores, 0, scores.length/2);
+		int secondHalf = average(scores, scores.length/2, scores.length);
+		return Math.max(firstHalf, secondHalf);
 	}
 
 	public int average(int[] scores, int start, int end) {
 		int sum = 0;
-		for(int i = start; i <= end; i++) {
-			sum += scores[start];
+		for(int i = start; i < end; i++) {
+			sum += scores[i];
 		}
 		return sum / (end - start);
 	}
@@ -181,5 +183,60 @@ public class APExercises {
 		}
 		return sum;
 	}
+	
+	public int userCompare(String aName, int aId, String bName, int bId) {
+		if(aName.compareTo(bName) != 0) return aName.compareTo(bName) < 0 ? -1 : 1;
+		else if(aId != bId) return aId < bId ? -1 : 1;
+		return 0;
+	}
+	
+	public String[] mergeTwo(String[] a, String[] b, int n) {
+		String[] result = new String[n];
+		int aI = 0;
+		int bI = 0;
+		for(int i = 0; i < n; i++) {
+			int diff = a[aI].compareTo(b[bI]);
+			if(diff < 0) {
+				result[i] = a[aI++];
+			}
+			else if(diff > 0) {
+				result[i] = b[bI++];
+			}
+			else {
+				result[i] = a[aI++];
+				bI++;
+			}
+		}
+		return result;
+	}
+	
+	public int commonTwo(String[] a, String[] b) {
+		int count = 0;
+		int aI = 0;
+		int bI = 0;
+		if(a[0].equals(b[0])) {
+			count++;
+			aI++;
+			bI++;
+		} else if(a[0].compareTo(b[0]) < 0) {
+			aI++;
+		} else {
+			bI++;
+		}
+		while(aI < a.length && bI < b.length) {
+			if(aI > 0 && a[aI - 1].equals(a[aI])) {
+				aI++;
+			} else if(a[aI].equals(b[bI])) {
+				count++;
+				aI++;
+				bI++;
+			} else if(a[aI].compareTo(b[bI]) < 0) {
+				aI++;
+			} else {
+				bI++;
+			}
+		}
+		return count;
+	} // END OF AP-1
 
 }
