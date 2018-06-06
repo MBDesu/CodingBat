@@ -183,7 +183,7 @@ public class LogicExercises {
 
 	public int sumLimit(int a, int b) {
 		return String.valueOf(a + b).length() > String.valueOf(a).length() ? a : a + b;
-	}
+	} // END OF Logic-1
 
 	public boolean makeBricks(int small, int big, int goal) {
 		if(goal > big * 5 + small) return false;
@@ -259,6 +259,6 @@ public class LogicExercises {
 	public int makeChocolate(int small, int big, int goal) {
 		int s = goal - Math.min(big,  goal / 5) * 5;
 		return s <= small ? s : -1;
-	}
+	} // END OF Logic-2
 
 }

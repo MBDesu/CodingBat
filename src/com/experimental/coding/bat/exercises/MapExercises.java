@@ -78,7 +78,7 @@ public class MapExercises {
 			}
 		}
 		return map;
-	}
+	} // END OF Map-1
 	
 	public Map<String, Integer> word0(String[] strings) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
@@ -177,6 +177,6 @@ public class MapExercises {
 			}
 		}
 		return strings;
-	}
+	} // END OF Map-2
 
 }
