@@ -395,6 +395,69 @@ public class StringExercises {
 			position = str.indexOf(word, position + 1);
 		}
 		return result;
-	}
+	} // END OF String-2
 
+	public int countYZ(String str) {
+		int count = 0;
+		String[] words = str.split("([^a-zA-Z])");
+		for(String word : words) {
+			if(word.matches("(^.*[yYzZ]{1,}$)")) count++;
+		}
+		return count;
+		// regexes feel like cheating
+	}
+	
+	public String withoutString(String base, String remove) {
+		return base.replaceAll("(?i)"+remove, "");
+		// regexes are cheating
+	}
+	
+	public boolean equalsIsNot(String str) {
+		// hey I get to use my clever algorithm that's probably horrible again
+		int numIs = (str.length() - str.replaceAll("is", "").length()) / 2;
+		int numNot = (str.length() - str.replaceAll("not", "").length()) / 3;
+		return numIs == numNot;
+	}
+	
+	public boolean gHappy(String str) {
+		int len = str.length();
+		boolean flag = true;
+		for(int i = 0; i < len; i++) {
+			if(str.charAt(i) == 'g') {
+				if(i > 0 && str.charAt(i-1) == 'g') flag = true;
+				else if(i < len-1 && str.charAt(i+1) == 'g') flag = true;
+				else flag = false;
+			}
+		}
+		return flag;
+	}
+	
+	public int countTriple(String str) {
+		int count = 0;
+		for(int i = 1; i < str.length()-1; i++) {
+			if(str.charAt(i) == str.charAt(i-1) && str.charAt(i) == str.charAt(i+1)) count++;
+		}
+		return count;
+	}
+	
+	public int sumDigits(String str) {
+		int sum = 0;
+		for(int i = 0; i < str.length(); i++) {
+			if(Character.isDigit(str.charAt(i))) sum += Integer.parseInt(str.substring(i, i+1)); 
+		}
+		return sum;
+	}
+	
+	public String sameEnds(String string) {
+		int len = string.length();
+		String result = "";
+		String temp = "";
+		for(int i = 0; i < len; i++) {
+			temp += string.charAt(i);
+			int tempLen = temp.length();
+			if(i < len / 2 && temp.equals(string.substring(len-tempLen, len))) result = temp;
+		}
+		return result;
+	} // TODO: complete String-3
+	
 }
