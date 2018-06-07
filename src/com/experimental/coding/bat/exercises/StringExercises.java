@@ -7,7 +7,7 @@ public class StringExercises {
 	}
 
 	public StringExercises() {
-
+		System.out.println(getSandwich("breadjambread"));
 	}
 
 	public String helloName(String name) {
@@ -307,17 +307,18 @@ public class StringExercises {
 	}
 
 	public String getSandwich(String str) {
-		int breadCount = 0;
-		int[] breadPos = new int[2];
-		int index = -1;
-		for(int i = 0; i < str.length() - 5; i++) {
-			if("bread".equals(str.substring(i, i + 6))) {
-				breadCount++;
-				breadPos[++index] = i;
+		// I feel clever, though I doubt the efficiency of breadCount
+		int breadCount = (str.length() - str.replaceAll("bread", "").length()) / 5;
+		if(breadCount < 2) return "";
+		int firstBreadPos = str.indexOf("bread");
+		int secondBreadPos = -1;
+		for(int i = str.length(); i > 5; i--) {
+			if("bread".equals(str.substring(i-5, i))) {
+				secondBreadPos = i - 5;
+				break;
 			}
 		}
-		if(breadCount < 2) return "";
-		return str.substring(breadPos[0] + 5, breadPos[1]);
+		return str.substring(firstBreadPos+5, secondBreadPos);
 	}
 
 	public boolean sameStarChar(String str) {
@@ -386,10 +387,14 @@ public class StringExercises {
 	
 	public String wordEnds(String str, String word) {
 		String result = "";
-		for(int i = 0; i < str.length(); i++) {
-			
+		int position = str.indexOf(word);
+		while(position != -1) {
+			if(position != 0) result += str.charAt(position - 1);
+			if(position + word.length() == str.length()) break;
+			result += str.charAt(position + word.length());
+			position = str.indexOf(word, position + 1);
 		}
 		return result;
-	} // TODO: finish String-2
+	}
 
 }
