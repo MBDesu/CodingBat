@@ -203,6 +203,13 @@ public class RecursionExercises {
 		// return str.substring(0, sub.length()).equals(sub) ? strCopies(str.substring(1), sub, --n) : strCopies(str.substring(1), sub, n);
 	} // END OF Recursion-1
 
+	public boolean groupSum(int start, int[] nums, int target) {
+		if(start >= nums.length) return (target == 0);
+		if(groupSum(start + 1, nums, target - nums[start])) return true; // backtracking is hard
+		if(groupSum(start + 1, nums, target)) return true; // really hard
+		return false;
+	}
+	
 	// the following are not CodingBat exercises, but exercises from elsewhere
 
 	public boolean isPowerOfTwo(int i) {
@@ -247,14 +254,6 @@ public class RecursionExercises {
 	private boolean isPalindrome(String str, int n) {
 		if(n <= 1) return true;
 		return str.charAt(Math.abs(n - str.length())) == str.charAt(n - 1) ? isPalindrome(str, --n) : false;
-	}
-
-	// this one uses backtracking, which is hard af
-	public boolean groupSum(int start, int[] nums, int target) {
-		if(start >= nums.length) return (target == 0);
-		if(groupSum(start + 1, nums, target - nums[start])) return true;
-		if(groupSum(start + 1, nums, target)) return true;
-		return false;
 	}
 
 }
