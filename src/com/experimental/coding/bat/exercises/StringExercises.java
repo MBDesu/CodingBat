@@ -7,7 +7,7 @@ public class StringExercises {
 	}
 
 	public StringExercises() {
-		System.out.println(getSandwich("breadjambread"));
+		
 	}
 
 	public String helloName(String name) {
@@ -384,7 +384,7 @@ public class StringExercises {
 		}
 		return result;
 	}
-	
+
 	public String wordEnds(String str, String word) {
 		String result = "";
 		int position = str.indexOf(word);
@@ -406,19 +406,19 @@ public class StringExercises {
 		return count;
 		// regexes feel like cheating
 	}
-	
+
 	public String withoutString(String base, String remove) {
 		return base.replaceAll("(?i)"+remove, "");
 		// regexes are cheating
 	}
-	
+
 	public boolean equalsIsNot(String str) {
 		// hey I get to use my clever algorithm that's probably horrible again
 		int numIs = (str.length() - str.replaceAll("is", "").length()) / 2;
 		int numNot = (str.length() - str.replaceAll("not", "").length()) / 3;
 		return numIs == numNot;
 	}
-	
+
 	public boolean gHappy(String str) {
 		int len = str.length();
 		boolean flag = true;
@@ -431,7 +431,7 @@ public class StringExercises {
 		}
 		return flag;
 	}
-	
+
 	public int countTriple(String str) {
 		int count = 0;
 		for(int i = 1; i < str.length()-1; i++) {
@@ -439,7 +439,7 @@ public class StringExercises {
 		}
 		return count;
 	}
-	
+
 	public int sumDigits(String str) {
 		int sum = 0;
 		for(int i = 0; i < str.length(); i++) {
@@ -447,7 +447,7 @@ public class StringExercises {
 		}
 		return sum;
 	}
-	
+
 	public String sameEnds(String string) {
 		int len = string.length();
 		String result = "";
@@ -458,6 +458,61 @@ public class StringExercises {
 			if(i < len / 2 && temp.equals(string.substring(len-tempLen, len))) result = temp;
 		}
 		return result;
-	} // TODO: complete String-3
+	} 
+
+	public String mirrorEnds(String string) {
+		int len = string.length();
+		String result = "";
+		String frontTemp = "";
+		String backTemp = "";
+		for(int i = 0; i < len; i++) {
+			frontTemp += string.charAt(i);
+			backTemp += string.charAt((len - i) - 1);
+			if(frontTemp.equals(backTemp)) result = frontTemp;
+			else break;
+		}
+		return result;
+	}
+
+	public int maxBlock(String str) {
+		int max = 0;
+		int count = 1;
+		for(int i = 0; i < str.length()-1; i++) {
+			if(str.charAt(i) == str.charAt(i + 1)) { 
+				count++;
+			}
+			else count = 1;
+			if(count > max) max = count;
+		}
+		return max;
+	}
+
+	public int sumNumbers(String str) {
+		int sum = 0;
+		for(int i = 0; i < str.length(); i++) {
+			String bigNum = "";
+			while(i < str.length() && Character.isDigit(str.charAt(i))){
+				bigNum += str.charAt(i);
+				i++;
+			}
+			if(!"".equals(bigNum)) sum += Integer.parseInt(bigNum);
+		}
+		return sum;
+	}
 	
+	public String notReplace(String str) {
+		String result = "";
+		for(int i = 0; i < str.length(); i++) {
+			if(i-1 >=0 && Character.isLetter(str.charAt(i-1)) || i+2 < str.length() && Character.isLetter(str.charAt(i+2))) {
+				result += str.charAt(i);
+			} else if(i+1 < str.length() && str.substring(i, i+2).equals("is")) {
+				result += "is not";
+				i++;
+			} else {
+				result += str.charAt(i);
+			}
+		}
+		return result;
+	} // END OF String-3
+
 }
