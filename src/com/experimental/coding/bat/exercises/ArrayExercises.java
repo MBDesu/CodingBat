@@ -7,7 +7,8 @@ public class ArrayExercises {
 	}
 
 	public ArrayExercises() {
-		
+		int[] arr = { 9, 1, 1, 4, 2, 1, 1, 1 };
+		System.out.println(maxMirror(arr));
 	}
 
 	// Start of Array-1
@@ -578,7 +579,7 @@ public class ArrayExercises {
 		}
 		return result;
 	}
-	
+
 	public int[] seriesUp(int n) {
 		int[] result = new int[n * (n + 1) / 2];
 		int pos = 0;
@@ -589,5 +590,37 @@ public class ArrayExercises {
 		}
 		return result;
 	}
+
+	public int maxMirror(int[] nums) {
+		int result = 0;
+		for(int i = 0; i < nums.length; i++) {
+			for(int j = nums.length-1; j >= i; j--) {
+				int count = 0;
+				boolean match = (nums[i] == nums[j]);
+				while(match) {
+					count++;
+					int front = i + count;
+					int back = j - count;
+					match = (front < nums.length) && (back >= 0) && (nums[front] == nums[back]);
+				}
+				if(count > result) result = count;
+			}
+		}
+		return result;
+	}
+	
+	public int countClumps(int[] nums) {
+		int count = 0;
+		boolean match = false;
+		for(int i = 0; i < nums.length-1; i++) {
+			if(nums[i] == nums[i+1] && !match) {
+				match = true;
+				count++;
+			} else if(nums[i] != nums[i+1]) {
+				match = false;
+			}
+		}
+		return count;
+	} // END OF Array-3
 
 }
