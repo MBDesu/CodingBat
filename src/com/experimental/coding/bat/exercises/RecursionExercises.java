@@ -9,7 +9,7 @@ public class RecursionExercises {
 
 	public RecursionExercises() {
 		// do testing here
-
+		System.out.println(fibonacci(42));
 	}
 
 	/*
@@ -40,10 +40,16 @@ public class RecursionExercises {
 	 * fibonacci number, with n=0 representing the start of the sequence.
 	 */
 	public int fibonacci(int n) {
-		// naive implementation -- very inefficient; memoization makes this O(n) average
+		return fibonacci(n, new int[n + 1]);
+	}
+	
+	private int fibonacci(int n, int[] a) {
+		// should be O(n), miles better than O(2^n)
 		if(n == 0) return 0;
-		if(n == 1) return 1;
-		return fibonacci(n - 1) + fibonacci(n - 2);
+		if(n == 1 || n == 2) return 1;
+		if(a[n] != 0) return a[n];
+		a[n] = fibonacci(n - 1, a) + fibonacci(n - 2, a);
+		return a[n];
 	}
 
 	/*
